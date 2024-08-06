@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "BOOKINGDETAILS",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-bookingdetails-staging-b82b9-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/f25cceabc1a65ca1347dffd87886ad348e2710bf"
+}

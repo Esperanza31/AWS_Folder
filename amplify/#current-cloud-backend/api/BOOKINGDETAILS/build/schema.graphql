@@ -1,0 +1,380 @@
+type CLE @aws_iam @aws_api_key {
+  id: ID!
+  BusStop: String!
+  TripNo: Int!
+  Count: Int!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type KAP @aws_iam @aws_api_key {
+  id: ID!
+  BusStop: String!
+  TripNo: Int!
+  Count: Int!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type BOOKINGDETAILS5 @aws_iam @aws_api_key {
+  id: ID!
+  MRTStation: String!
+  TripNo: Int!
+  BusStop: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelCLEConnection @aws_api_key @aws_iam {
+  items: [CLE]!
+  nextToken: String
+}
+
+input ModelCLEFilterInput {
+  id: ModelIDInput
+  BusStop: ModelStringInput
+  TripNo: ModelIntInput
+  Count: ModelIntInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelCLEFilterInput]
+  or: [ModelCLEFilterInput]
+  not: ModelCLEFilterInput
+}
+
+type Query {
+  getCLE(id: ID!): CLE @aws_api_key @aws_iam
+  listCLES(filter: ModelCLEFilterInput, limit: Int, nextToken: String): ModelCLEConnection @aws_api_key @aws_iam
+  getKAP(id: ID!): KAP @aws_api_key @aws_iam
+  listKAPS(filter: ModelKAPFilterInput, limit: Int, nextToken: String): ModelKAPConnection @aws_api_key @aws_iam
+  getBOOKINGDETAILS5(id: ID!): BOOKINGDETAILS5 @aws_api_key @aws_iam
+  listBOOKINGDETAILS5s(filter: ModelBOOKINGDETAILS5FilterInput, limit: Int, nextToken: String): ModelBOOKINGDETAILS5Connection @aws_api_key @aws_iam
+}
+
+input ModelCLEConditionInput {
+  BusStop: ModelStringInput
+  TripNo: ModelIntInput
+  Count: ModelIntInput
+  and: [ModelCLEConditionInput]
+  or: [ModelCLEConditionInput]
+  not: ModelCLEConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+}
+
+input CreateCLEInput {
+  id: ID
+  BusStop: String!
+  TripNo: Int!
+  Count: Int!
+}
+
+input UpdateCLEInput {
+  id: ID!
+  BusStop: String
+  TripNo: Int
+  Count: Int
+}
+
+input DeleteCLEInput {
+  id: ID!
+}
+
+type Mutation {
+  createCLE(input: CreateCLEInput!, condition: ModelCLEConditionInput): CLE @aws_api_key @aws_iam
+  updateCLE(input: UpdateCLEInput!, condition: ModelCLEConditionInput): CLE @aws_api_key @aws_iam
+  deleteCLE(input: DeleteCLEInput!, condition: ModelCLEConditionInput): CLE @aws_api_key @aws_iam
+  createKAP(input: CreateKAPInput!, condition: ModelKAPConditionInput): KAP @aws_api_key @aws_iam
+  updateKAP(input: UpdateKAPInput!, condition: ModelKAPConditionInput): KAP @aws_api_key @aws_iam
+  deleteKAP(input: DeleteKAPInput!, condition: ModelKAPConditionInput): KAP @aws_api_key @aws_iam
+  createBOOKINGDETAILS5(input: CreateBOOKINGDETAILS5Input!, condition: ModelBOOKINGDETAILS5ConditionInput): BOOKINGDETAILS5 @aws_api_key @aws_iam
+  updateBOOKINGDETAILS5(input: UpdateBOOKINGDETAILS5Input!, condition: ModelBOOKINGDETAILS5ConditionInput): BOOKINGDETAILS5 @aws_api_key @aws_iam
+  deleteBOOKINGDETAILS5(input: DeleteBOOKINGDETAILS5Input!, condition: ModelBOOKINGDETAILS5ConditionInput): BOOKINGDETAILS5 @aws_api_key @aws_iam
+}
+
+input ModelSubscriptionCLEFilterInput {
+  id: ModelSubscriptionIDInput
+  BusStop: ModelSubscriptionStringInput
+  TripNo: ModelSubscriptionIntInput
+  Count: ModelSubscriptionIntInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionCLEFilterInput]
+  or: [ModelSubscriptionCLEFilterInput]
+}
+
+type Subscription {
+  onCreateCLE(filter: ModelSubscriptionCLEFilterInput): CLE @aws_subscribe(mutations: ["createCLE"]) @aws_api_key @aws_iam
+  onUpdateCLE(filter: ModelSubscriptionCLEFilterInput): CLE @aws_subscribe(mutations: ["updateCLE"]) @aws_api_key @aws_iam
+  onDeleteCLE(filter: ModelSubscriptionCLEFilterInput): CLE @aws_subscribe(mutations: ["deleteCLE"]) @aws_api_key @aws_iam
+  onCreateKAP(filter: ModelSubscriptionKAPFilterInput): KAP @aws_subscribe(mutations: ["createKAP"]) @aws_api_key @aws_iam
+  onUpdateKAP(filter: ModelSubscriptionKAPFilterInput): KAP @aws_subscribe(mutations: ["updateKAP"]) @aws_api_key @aws_iam
+  onDeleteKAP(filter: ModelSubscriptionKAPFilterInput): KAP @aws_subscribe(mutations: ["deleteKAP"]) @aws_api_key @aws_iam
+  onCreateBOOKINGDETAILS5(filter: ModelSubscriptionBOOKINGDETAILS5FilterInput): BOOKINGDETAILS5 @aws_subscribe(mutations: ["createBOOKINGDETAILS5"]) @aws_api_key @aws_iam
+  onUpdateBOOKINGDETAILS5(filter: ModelSubscriptionBOOKINGDETAILS5FilterInput): BOOKINGDETAILS5 @aws_subscribe(mutations: ["updateBOOKINGDETAILS5"]) @aws_api_key @aws_iam
+  onDeleteBOOKINGDETAILS5(filter: ModelSubscriptionBOOKINGDETAILS5FilterInput): BOOKINGDETAILS5 @aws_subscribe(mutations: ["deleteBOOKINGDETAILS5"]) @aws_api_key @aws_iam
+}
+
+type ModelKAPConnection @aws_api_key @aws_iam {
+  items: [KAP]!
+  nextToken: String
+}
+
+input ModelKAPFilterInput {
+  id: ModelIDInput
+  BusStop: ModelStringInput
+  TripNo: ModelIntInput
+  Count: ModelIntInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelKAPFilterInput]
+  or: [ModelKAPFilterInput]
+  not: ModelKAPFilterInput
+}
+
+input ModelKAPConditionInput {
+  BusStop: ModelStringInput
+  TripNo: ModelIntInput
+  Count: ModelIntInput
+  and: [ModelKAPConditionInput]
+  or: [ModelKAPConditionInput]
+  not: ModelKAPConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+}
+
+input CreateKAPInput {
+  id: ID
+  BusStop: String!
+  TripNo: Int!
+  Count: Int!
+}
+
+input UpdateKAPInput {
+  id: ID!
+  BusStop: String
+  TripNo: Int
+  Count: Int
+}
+
+input DeleteKAPInput {
+  id: ID!
+}
+
+input ModelSubscriptionKAPFilterInput {
+  id: ModelSubscriptionIDInput
+  BusStop: ModelSubscriptionStringInput
+  TripNo: ModelSubscriptionIntInput
+  Count: ModelSubscriptionIntInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionKAPFilterInput]
+  or: [ModelSubscriptionKAPFilterInput]
+}
+
+type ModelBOOKINGDETAILS5Connection @aws_api_key @aws_iam {
+  items: [BOOKINGDETAILS5]!
+  nextToken: String
+}
+
+input ModelBOOKINGDETAILS5FilterInput {
+  id: ModelIDInput
+  MRTStation: ModelStringInput
+  TripNo: ModelIntInput
+  BusStop: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelBOOKINGDETAILS5FilterInput]
+  or: [ModelBOOKINGDETAILS5FilterInput]
+  not: ModelBOOKINGDETAILS5FilterInput
+}
+
+input ModelBOOKINGDETAILS5ConditionInput {
+  MRTStation: ModelStringInput
+  TripNo: ModelIntInput
+  BusStop: ModelStringInput
+  and: [ModelBOOKINGDETAILS5ConditionInput]
+  or: [ModelBOOKINGDETAILS5ConditionInput]
+  not: ModelBOOKINGDETAILS5ConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+}
+
+input CreateBOOKINGDETAILS5Input {
+  id: ID
+  MRTStation: String!
+  TripNo: Int!
+  BusStop: String!
+}
+
+input UpdateBOOKINGDETAILS5Input {
+  id: ID!
+  MRTStation: String
+  TripNo: Int
+  BusStop: String
+}
+
+input DeleteBOOKINGDETAILS5Input {
+  id: ID!
+}
+
+input ModelSubscriptionBOOKINGDETAILS5FilterInput {
+  id: ModelSubscriptionIDInput
+  MRTStation: ModelSubscriptionStringInput
+  TripNo: ModelSubscriptionIntInput
+  BusStop: ModelSubscriptionStringInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionBOOKINGDETAILS5FilterInput]
+  or: [ModelSubscriptionBOOKINGDETAILS5FilterInput]
+}
